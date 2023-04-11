@@ -1,4 +1,5 @@
 # Hotplates
+[Documentation on readthedocs](https://hotplates.readthedocs.io/en/latest/)
 Serial control of hotplate stirrers.
 
 ## MSHPro
