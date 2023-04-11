@@ -4,6 +4,11 @@ from typing import Dict, Callable, Union, Optional, Any
 from . import SerialThreadedDuplex
 from .MSHProCommunication import COMMUNICATION
 
+import logging
+
+logger = logging.getLogger("Hotplates.MSHPro")
+logger.addHandler(logging.NullHandler())
+
 
 class MSHPro:
     """
@@ -120,10 +125,11 @@ class MSHPro:
         """
         d = dict() if d is None else d
         self.serial_open()
-        value = self.__Serial.write_with_read(
-            command.to_bytes(var), size=command.len_rx
-        )
-        d.update(command.parse_response(value))
+        w_bytes = command.to_bytes(var)
+        logger.debug("Sending bytes: {}.".format(w_bytes.hex()))
+        r_bytes = self.__Serial.write_with_read(w_bytes, size=command.len_rx)
+        logger.debug("Received bytes: {}.".format(r_bytes.hex()))
+        d.update(command.parse_response(r_bytes))
         return d
 
     def ping(self) -> bool:
@@ -218,15 +224,15 @@ class MSHPro:
             name = command.name.lower()
             # already off
             if not current_status["{}_on".format(name)]:
-                print(command, "OFF", "Success [already off]")
+                logger.info("{} {} {}".format(command, "OFF", "Success [already off]"))
                 continue
             # send current setting to turn off
             if self.__command(command, current_status["{}_set".format(name)])[
                 "success"
             ]:
-                print(command, "OFF", "Success")
+                logger.info("{} {} {}".format(command, "OFF", "Success"))
                 continue
-            print(command, "OFF", "ERROR!")
+            logger.error("{} {} {}".format(command, "OFF", "ERROR!"))
 
     def __setval(self, command: COMMUNICATION, val: Any = None) -> bool:
         """
@@ -245,13 +251,15 @@ class MSHPro:
         if set_value == val:
             # already on
             if on_status:
-                print(command, val, "Success [already at target value]")
+                logger.info(
+                    "{} {} {}".format(command, val, "Success [already at target value]")
+                )
                 return True
             # send same value to turn on
             if self.__command(command, set_value)["success"]:
-                print(command, val, "Success [switched on]")
+                logger.info("{} {} {}".format(command, val, "Success [switched on]"))
                 return True
-            print(command, val, "ERROR!")
+            logger.error("{} {} {}".format(command, val, "ERROR!"))
             return False
 
         # not at correct value
@@ -259,20 +267,26 @@ class MSHPro:
         # send value once to change value
         # this will also toggle the on / off status
         if not self.__command(command, val)["success"]:
-            print(command, val, "ERROR!")
+            logger.error("{} {} {}".format(command, val, "ERROR!"))
             return False
 
         # was not previously on - but now on with correct value
         if not on_status:
-            print(command, val, "Success [set value, switched on]")
+            logger.info(
+                "{} {} {}".format(command, val, "Success [set value, switched on]")
+            )
             return True
 
         # send value a second time to turn back on
         if self.__command(command, val)["success"]:
-            print(command, val, "Success [switched off, set value, switched on]")
+            logger.info(
+                "{} {} {}".format(
+                    command, val, "Success [switched off, set value, switched on]"
+                )
+            )
             return True
 
-        print(command, val, "ERROR!")
+        logger.error("{} {} {}".format(command, val, "ERROR!"))
         return False
 
     def off(self) -> None:
@@ -377,8 +391,9 @@ class MSHPro:
 
 
         Examples:
-        
+
         ::
+
             hp = Hotplates.MSHPro(0)
             hp.text_command("STATUS")
             hp.text_command("HEAT OFF")

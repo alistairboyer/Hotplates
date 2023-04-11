@@ -34,12 +34,11 @@ dependencies = [
 
 [project.optional-dependencies]
 
-[tool.setuptools]
-package-dir = {"" = "Hotplates"}
+[tool.setuptools.packages.find]
+namespaces = false
 
 [options.packages.find]
 where = ["Hotplates"]
 include = ["Hotplates*"]
-exclude = ["images*", "docs*", "tests*"]
 
 [tool.mypy]

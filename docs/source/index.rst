@@ -39,6 +39,16 @@ Example usage:
    >> {'success': True, 'stir_set': 'Off', 'stir_actual': 0, 'heat_set': 'Off', 'heat_actual': 1.1, 'stir_on': False, 'heat_on': False, 'heat_limit': 340.0}
 
 
+Logging
+-------
+
+Logging is implemented in :mod:`.MSHPro`.
+The handler is :class:`logging.NullHandler`.
+Communicated ``bytes`` are logged at :class:`logging.DEBUG` level.
+Commands are logged at :class:`logging.INFO` level.
+The logger is available through: :code:`logger = logging.getLogger("Hotplates.MSHPro")`.
+
+
 .. automodule:: Hotplates.MSHPro
    :members:
    :member-order: bysource
