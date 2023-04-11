@@ -59,7 +59,7 @@ exclude_patterns = []
 #
 html_theme = "sphinx_rtd_theme"
 html_logo = ""
-# html_sidebars = {'**' : ['globaltoc.html', 'localtoc.html', 'relations.html', 'sourcelink.html', 'searchbox.html']}
+html_static_path = []
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
