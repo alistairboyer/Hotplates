@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "Hotplates"
 version = "0.3.0"
 description = "Tools for serial communications with hotplates."
-readme = "README.rst"
+readme = "README.md"
 requires-python = ">=3.6"
 license = {file = "LICENSE"}
 authors = [
@@ -34,8 +34,12 @@ dependencies = [
 
 [project.optional-dependencies]
 
+[tool.setuptools]
+package-dir = {"" = "Hotplates"}
+
 [options.packages.find]
 where = ["Hotplates"]
-include = ["*"]
+include = ["Hotplates*"]
+exclude = ["images*", "docs*", "tests*"]
 
 [tool.mypy]
