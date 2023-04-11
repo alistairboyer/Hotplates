@@ -79,8 +79,8 @@ def setup(app):
 
 html_context = {
     "display_github": True, # Integrate GitHub
-    "github_user": "AlistairBoyer", # Username
+    "github_user": "alistairboyer", # Username
     "github_repo": "Hotplates", # Repo name
     "github_version": "main", # Version
-    "conf_py_path": "/source/", # Path in the checkout to the docs root
+    "conf_py_path": "/docs/source/", # Path in the checkout to the docs root
 }
