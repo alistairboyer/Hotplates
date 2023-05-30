@@ -51,14 +51,14 @@ class COMMUNICATION(enum.Enum):
 
     Example usage:
 
-    ::
+    .. code-block:: python
 
-        import Hotplates.MSHProCommunication
-        comm = Hotplates.MSHProCommunication.COMMUNICATION.PING
-        comm.to_bytes()
-        >> b'\\xfe\\xa0\\x00\\x00\\x00\\xa0'
-        comm.len_rx
-        >> 6
+        >>> import Hotplates.MSHProCommunication
+        >>> comm = Hotplates.MSHProCommunication.COMMUNICATION.PING
+        >>> comm.to_bytes()
+        b'\\xfe\\xa0\\x00\\x00\\x00\\xa0'
+        >>> comm.len_rx
+        6
 
     """
 

@@ -392,15 +392,15 @@ class MSHPro:
 
         Examples:
 
-        ::
+        .. code-block:: python
 
-            hp = Hotplates.MSHPro(0)
-            hp.text_command("STATUS")
-            hp.text_command("HEAT OFF")
-            hp.text_command("MODE B")
-            hp.text_command("stir 560")
-            hp.text_command("PING")
-            hp.text_command("OFF")
+            >>> hp = Hotplates.MSHPro(0)
+            >>> hp.text_command("STATUS")
+            >>> hp.text_command("HEAT OFF")
+            >>> hp.text_command("MODE B")
+            >>> hp.text_command("stir 560")
+            >>> hp.text_command("PING")
+            >>> hp.text_command("OFF")
         """
 
         cmd_dict: Dict[str, Callable]  # type: ignore

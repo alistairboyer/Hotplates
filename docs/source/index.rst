@@ -23,20 +23,18 @@ extension of PySerial's :mod:`serial.Serial`.
 
 Example usage:
 
-::
+.. code-block:: python
 
-   import Hotplates
-   hp = Hotplates.MSHPro(port="/dev/ttyUSB0")
-   hp.status()
-   >> {'success': True, 'stir_set': 'Off', 'stir_actual': 0, 'heat_set': 'Off', 'heat_actual': 17.5, 'stir_on': False, 'heat_on': False, 'heat_limit': 340.0}
-   hp.stir(400)
-   # wait
-   hp.status()
-   >> {'success': True, 'stir_set': 400, 'stir_actual': 399, 'heat_set': 'Off', 'heat_actual': 17.7, 'stir_on': True, 'heat_on': False, 'heat_limit': 340.0}
-   hp.off()
-   # wait
-   hp.status()
-   >> {'success': True, 'stir_set': 'Off', 'stir_actual': 0, 'heat_set': 'Off', 'heat_actual': 1.1, 'stir_on': False, 'heat_on': False, 'heat_limit': 340.0}
+   >>> import Hotplates
+   >>> hp = Hotplates.MSHPro(port="/dev/ttyUSB0")
+   >>> hp.status()
+   {'success': True, 'stir_set': 'Off', 'stir_actual': 0, 'heat_set': 'Off', 'heat_actual': 17.5, 'stir_on': False, 'heat_on': False, 'heat_limit': 340.0}
+   >>> hp.stir(400)  # Wait after command for hotplate to reach speed
+   >>> hp.status()
+   {'success': True, 'stir_set': 400, 'stir_actual': 399, 'heat_set': 'Off', 'heat_actual': 17.7, 'stir_on': True, 'heat_on': False, 'heat_limit': 340.0}
+   >>> hp.off()
+   >>> hp.status()
+   {'success': True, 'stir_set': 'Off', 'stir_actual': 0, 'heat_set': 'Off', 'heat_actual': 1.1, 'stir_on': False, 'heat_on': False, 'heat_limit': 340.0}
 
 
 Logging

@@ -16,12 +16,13 @@ class Serial(serial.Serial):  # type: ignore
 
     Example usage:
 
-    ::
+    .. code-block:: python
 
-        import Hotplates.SerialThreadedDuplex
-        s = Hotplates.SerialThreadedDuplex.Serial(port="/dev/ttyUSB0", timeout=1.0)
-        s.write_with_read_until(b"Hello!", expected="\\n")
-        s.value  # received bytes
+        >>> import Hotplates.SerialThreadedDuplex
+        >>> s = Hotplates.SerialThreadedDuplex.Serial(port="/dev/ttyUSB0", timeout=1.0)
+        >>> s.write_with_read_until(b"Hello!", expected="\\n")
+        >>> s.value  
+        # received bytes
 
     """
 
